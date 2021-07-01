@@ -22,7 +22,7 @@ function Home() {
                     </Col>
                 }
                 <Switch>
-                    <Route exact path={'/chat/:chatid'}>
+                    <Route  path={'/chat/:chatid'}>
                         <Col xs={24} md={16} className="h-100">
                             <Chat />
                         </Col>
