@@ -15,14 +15,16 @@ import { userLoggedIn } from './store/actions/auth';
 import { UIActions } from './store/reducers/UI';
 import { getRoomList } from './store/actions/rooms';
 import { roomsActions } from './store/reducers/rooms';
+import { useState } from 'react';
 
 
 function App() {
   const dispatch = useDispatch()
-
+  const [check, setCheck] = useState(true)
   useEffect(() => {
     try {
       dispatch(userLoggedIn())
+      setCheck(false)
     } catch { }
   }, [])
 
@@ -36,9 +38,13 @@ function App() {
   return (
 
     <Switch>
-      <PriavteRoute path="/" exact={true}  >
+      {check ? <PriavteRoute exact={true} path="/">
         <Home />
-      </PriavteRoute>
+      </PriavteRoute> :
+        <PriavteRoute path="/">
+          <Home />
+        </PriavteRoute>
+      }
       <PublicRoute path="/signin" exact={true}>
         <Signin />
       </PublicRoute>
@@ -49,3 +55,4 @@ function App() {
 }
 
 export default App;
+
