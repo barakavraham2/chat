@@ -8,7 +8,7 @@ import Signin from './pages/Signin'
 import PriavteRoute from './components/PriavteRoute'
 import PublicRoute from './components/PublicRoute';
 import { ProfileProvider } from './context/profile.context';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { authActions } from '../src/store/reducers/auth'
 import { auth, database } from '../src/misc/firebase'
 import { userLoggedIn } from './store/actions/auth';
@@ -20,11 +20,11 @@ import { useState } from 'react';
 
 function App() {
   const dispatch = useDispatch()
-  const [check, setCheck] = useState(true)
+  const user = useSelector(state => state.auth.login)
+  console.log(user)
   useEffect(() => {
     try {
       dispatch(userLoggedIn())
-      setCheck(false)
     } catch { }
   }, [])
 
@@ -38,10 +38,11 @@ function App() {
   return (
 
     <Switch>
-      {check ? <PriavteRoute exact={true} path="/">
+      {user ? <PriavteRoute path="/">
         <Home />
       </PriavteRoute> :
-        <PriavteRoute path="/">
+
+        <PriavteRoute exact={true} path="/">
           <Home />
         </PriavteRoute>
       }
@@ -55,4 +56,3 @@ function App() {
 }
 
 export default App;
-
