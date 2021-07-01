@@ -36,7 +36,7 @@ function App() {
   return (
 
     <Switch>
-      <PriavteRoute path="/"  >
+      <PriavteRoute path="/" exact={true}  >
         <Home />
       </PriavteRoute>
       <PublicRoute path="/signin" exact={true}>
